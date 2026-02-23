@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário, Meu Amor ❤️</title>
+
+    <!-- Fontes do Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+
+    <!-- Canvas para fundo animado -->
+    <canvas id="bg"></canvas>
+
+    <!-- Áudio de fundo -->
+    <audio id="bgMusic" loop>
+        <source src="musica/Lisboa.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Header -->
+    <header>
+        <h1>Feliz Aniversário, Meu Amor ❤️</h1>
+        
+    </header>
+
+    <!-- Prévia das Cartas - Design Melhorado -->
+    <div class="cartas-section">
+        <h2 class="cartas-titulo">Minhas Cartas para Você</h2>
+        <div class="cartas-preview">
+            <div class="preview-card card-1">
+                <div class="card-number">01</div>
+                <div class="card-icon">💌</div>
+                <h3>Para a Mulher da Minha Vida</h3>
+                <p>Uma mensagem especial para você neste dia especial...</p>
+                <a href="carta1.html" class="preview-link">Ler Carta →</a>
+            </div>
+
+            <div class="preview-card card-2">
+                <div class="card-number">02</div>
+                <div class="card-icon">💝</div>
+                <h3>Sobre Nós</h3>
+                <p>Nossos momentos, nossos sentimentos, nossa história...</p>
+                <a href="carta2.html" class="preview-link">Ler Carta →</a>
+            </div>
+
+            <div class="preview-card card-3">
+                <div class="card-number">03</div>
+                <div class="card-icon">💍</div>
+                <h3>Minha Promessa</h3>
+                <p>Minhas promessas e compromisso com você para sempre...</p>
+                <a href="carta3.html" class="preview-link">Ler Carta →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link Inovador para Timeline -->
+    <div class="innovative-link-section" role="region" aria-label="seção de link para jornada no tempo">
+        <a href="timeline.html" class="timeline-link-button" 
+           aria-label="Explorar nossa jornada no tempo: a história do nosso relacionamento em uma linha do tempo interativa com animações"
+           title="Clique para ver a linha do tempo de nossos momentos especiais juntos">
+            <span class="link-icon">⏳</span>
+            <span class="link-text">Explorar Nossa Jornada</span>
+            <span class="link-arrow">→</span>
+        </a>
+        <p class="link-description">Reveja cada momento especial em nossa linha do tempo interativa</p>
+    </div>
+
+    <!-- Link Inovador para Palhaçadas -->
+    <div class="innovative-link-section" role="region" aria-label="seção de link para palhaçadas">
+        <a href="palhaçadas.html" class="palhaçadas-link-button" 
+           aria-label="Reviver nossas palhaçadas: os momentos mais divertidos, ridículos e engraçados que vivemos juntos com design interativo"
+           title="Clique para ver nossos momentos mais hilariantes e divertidos">
+            <span class="link-icon">😂</span>
+            <span class="link-text">Nossas Palhaçadas</span>
+            <span class="link-arrow">→</span>
+        </a>
+        <p class="link-description">Os momentos mais divertidos e ridículos que nos fazem rir juntos</p>
+    </div>
+
+    <!-- Jogo Interativo - Construindo o Futuro -->
+    <div class="game-section">
+        <h2 class="game-title">Vamos Construir Nosso Futuro? 🏠💕</h2>
+        <p class="game-subtitle">Clique nos corações para revelar Minhas promessas</p>
+        
+        <div class="game-container">
+            <div class="game-board">
+                <!-- Elementos clicáveis -->
+                <div class="game-element" data-promise="0">
+                    <div class="heart-icon">💕</div>
+                </div>
+                <div class="game-element" data-promise="1">
+                    <div class="heart-icon">💕</div>
+                </div>
+                <div class="game-element" data-promise="2">
+                    <div class="heart-icon">💕</div>
+                </div>
+                <div class="game-element" data-promise="3">
+                    <div class="heart-icon">💕</div>
+                </div>
+                <div class="game-element" data-promise="4">
+                    <div class="heart-icon">💕</div>
+                </div>
+                <div class="game-element" data-promise="5">
+                    <div class="heart-icon">💕</div>
+                </div>
+            </div>
+
+            <!-- Mostrador do futuro -->
+            <div class="future-display">
+                <div class="future-item">
+                    <div class="future-text">Nossa Casa de Sonhos</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-0"></div>
+                    </div>
+                </div>
+                <div class="future-item">
+                    <div class="future-text">Viagens Inesquecíveis</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-1"></div>
+                    </div>
+                </div>
+                <div class="future-item">
+                    <div class="future-text">Momentos de Felicidade</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-2"></div>
+                    </div>
+                </div>
+                <div class="future-item">
+                    <div class="future-text">Amor Eterno</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-3"></div>
+                    </div>
+                </div>
+                <div class="future-item">
+                    <div class="future-text">Risadas Diárias</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-4"></div>
+                    </div>
+                </div>
+                <div class="future-item">
+                    <div class="future-text">Fantásticos Compromissos</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-5"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promessa revelada -->
+            <div class="promise-reveal" id="promiseReveal">
+                <div class="promise-message">Clique em um coração para revelar uma promessa ✨</div>
+            </div>
+        </div>
+
+        <div class="game-score">
+            <span class="score-label">Futuro Construído:</span>
+            <span class="score-value" id="gameScore">0</span>/6
+        </div>
+    </div>
+
+    <!-- Jogo 2: Memória Romântica -->
+    <div class="memory-game-section">
+        <h2 class="game-title">Jogo da Memória do Nosso Amor 💝</h2>
+        <p class="game-subtitle">Encontre os pares de promessas de amor!</p>
+        
+        <div class="memory-instructions">
+            <p>Clique em duas cartas para encontrar os pares. Se acertar, ganham um ponto! 💕</p>
+        </div>
+
+        <div class="memory-board" id="memoryBoard">
+            <!-- Cartas serão geradas pelo JavaScript -->
+        </div>
+
+        <div class="memory-score">
+            <span class="memory-label">Pares Encontrados:</span>
+            <span class="memory-value" id="memoryScore">0</span>/6
+            <span class="memory-label" style="margin-left: 20px;">Tentativas:</span>
+            <span class="memory-value" id="memoryAttempts">0</span>
+        </div>
+
+        <button class="memory-reset-btn" id="memoryResetBtn">🔄 Recomeçar Jogo</button>
+    </div>
+
+    <!-- Garrafa com Mensagem Romântica -->
+    <div class="message-bottle-section">
+        <h2 class="game-title">Garrafa com Mensagens 💌</h2>
+        <p class="game-subtitle">Abra a garrafa para descobrir uma mensagem de amor!</p>
+        
+        <div class="bottle-container">
+            <div class="bottle" id="messageBottle">
+                <div class="bottle-cap"></div>
+                <div class="bottle-glass">
+                    <div class="bottle-message">💌</div>
+                </div>
+            </div>
+            
+            <div class="message-display" id="messageDisplay">
+                <p class="message-text">Clique na garrafa para revelar uma mensagem especial! 💕</p>
+            </div>
+        </div>
+
+        <button class="bottle-reset-btn" id="bottleResetBtn">🔄 Próxima Mensagem</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        Voce é meu mundo! ❤️
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossas Palhaçadas 😂 - Feliz Aniversário</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Palhaçadas Page Styles */
+        .palhaçadas-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .palhaçadas-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .palhaçadas-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: #ff2e63;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
+        }
+
+        .palhaçadas-header p {
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1em;
+        }
+
+        .palhaçadas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .palhaçada-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 46, 99, 0.3);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .card-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .palhaçada-card:hover .card-content {
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .palhaçada-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 46, 99, 0.15), transparent);
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 1;
+        }
+
+        .palhaçada-card:hover::before {
+            opacity: 1;
+            top: 0;
+            right: 0;
+        }
+
+        .palhaçada-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 46, 99, 0.25);
+            box-shadow: 0 15px 40px rgba(255, 46, 99, 0.3);
+            border-color: rgba(255, 46, 99, 0.6);
+        }
+
+        .palhaçada-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        .palhaçada-card:nth-child(1) .palhaçada-icon { animation-delay: 0s; }
+        .palhaçada-card:nth-child(2) .palhaçada-icon { animation-delay: 0.1s; }
+        .palhaçada-card:nth-child(3) .palhaçada-icon { animation-delay: 0.2s; }
+        .palhaçada-card:nth-child(4) .palhaçada-icon { animation-delay: 0.3s; }
+        .palhaçada-card:nth-child(5) .palhaçada-icon { animation-delay: 0.4s; }
+        .palhaçada-card:nth-child(6) .palhaçada-icon { animation-delay: 0.5s; }
+
+        .palhaçada-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            color: #ff69b4;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .palhaçada-description {
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            font-size: 0.95em;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 15px;
+        }
+
+        .video-thumbnail {
+            display: none;
+        }
+
+        .play-button {
+            display: none;
+        }
+
+        .video-text {
+            display: none;
+        }
+
+        /* Modal de Vídeo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 85vh;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid rgba(255, 46, 99, 0.5);
+            animation: slideUp 0.3s ease;
+        }
+
+        .video-modal-content video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            font-weight: bold;
+        }
+
+        .close-modal:hover {
+            color: #ff2e63;
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .memento-section {
+            background: rgba(255, 46, 99, 0.1);
+            border: 2px solid rgba(255, 46, 99, 0.3);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .memento-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: #ff2e63;
+            margin-bottom: 15px;
+        }
+
+        .memento-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff2e63, #ff69b4);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 46, 99, 0.4);
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 46, 99, 0.6);
+        }
+
+        .back-link:focus {
+            outline: 3px solid #ff69b4;
+            outline-offset: 2px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #ff2e63;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .palhaçadas-header h1 {
+                font-size: 2em;
+            }
+
+            .palhaçadas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .palhaçada-card {
+                padding: 20px;
+            }
+
+            .palhaçada-icon {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Canvas para fundo animado -->
+    <canvas id="bg"></canvas>
+
+    <!-- Áudio de fundo -->
+    <audio id="bgMusic" loop>
+        <source src="musica/chapeu de palha.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="palhaçadas-container">
+        <div class="palhaçadas-header">
+            <h1>Nossas Palhaçadas 😂💕</h1>
+            <p>Os momentos mais divertidos e engraçados que vivemos juntos</p>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 40px;">
+            <a href="index.html" class="back-link" aria-label="Voltar para página principal">← Voltar</a>
+        </div>
+
+        <div class="palhaçadas-grid" role="region" aria-label="galeria de momentos divertidos">
+            <div class="palhaçada-card" onclick="openVideo(0)">
+                <video class="card-video-bg" autoplay muted loop>
+                    <source src="videos/video1.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <div class="palhaçada-icon">😂</div>
+                    <div class="palhaçada-title">Aquele videozinho hilario</div>
+                    <div class="palhaçada-description">Quando você tentou fazer aquela dança e caímos de risadas. Aquele vídeo que guardamos para sempre.</div>
+                </div>
+            </div>
+
+            <div class="palhaçada-card" onclick="openVideo(1)">
+                <video class="card-video-bg" autoplay muted loop>
+                    <source src="videos/video2.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <div class="palhaçada-icon">🤪</div>
+                    <div class="palhaçada-title">Nossas piadas internas</div>
+                    <div class="palhaçada-description">Aquelas piadas bestas que só nós entendemos, mas que nos fazem rir descontroladamente. As que ninguém mais entende, mas deixa a gente morrendo de riso.</div>
+                </div>
+            </div>
+
+            <div class="palhaçada-card" onclick="openVideo(2)">
+                <video class="card-video-bg" autoplay muted loop>
+                    <source src="videos/video3.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <div class="palhaçada-icon">🎭</div>
+                    <div class="palhaçada-title">Os dramas aleatórios</div>
+                    <div class="palhaçada-description">Quando você faz aqueles drama de um momento besta e fingimos estar em um filme de ação ou ate mesmo romantico ou doramas. Os melhores momentos de improviso!</div>
+                </div>
+            </div>
+
+            <div class="palhaçada-card" onclick="openVideo(3)">
+                <video class="card-video-bg" autoplay muted loop>
+                    <source src="videos/video4.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <div class="palhaçada-icon">🍿</div>
+                    <div class="palhaçada-title">Noites juntos</div>
+                    <div class="palhaçada-description">Assistindo filmes e fazendo comentários aleatórios o tempo todo. Aquelas brincadeiras bobas e risadas a noite inteira.</div>
+                </div>
+            </div>
+
+            <div class="palhaçada-card" onclick="openVideo(4)">
+                <video class="card-video-bg" autoplay muted loop>
+                    <source src="videos/video5.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <div class="palhaçada-icon">🎤</div>
+                    <div class="palhaçada-title">Nossas performances musicais</div>
+                    <div class="palhaçada-description">Cantando na rua, no onibus, em qualquer lugar! Fazendo duetos de músicas aleatórias com aquele comprometimento de estrela de kpop.</div>
+                </div>
+            </div>
+
+            <div class="palhaçada-card" onclick="openVideo(5)">
+                <video class="card-video-bg" autoplay muted loop>
+                    <source src="videos/video6.mp4" type="video/mp4">
+                </video>
+                <div class="card-content">
+                    <div class="palhaçada-icon">🤝</div>
+                    <div class="palhaçada-title">Brincadeiras de cosquinhas</div>
+                    <div class="palhaçada-description">Aquelas disputas bobas que acabam em risadas, brigas de abraços e beijos.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="memento-section">
+            <div class="memento-title">💭 O Mais Importante</div>
+            <div class="memento-text">
+                Esses momentos de palhaçada e diversão são o coração da nossa história. 
+                São nas risadas, nas brincadeiras e na leveza que descobri o quanto te amo.
+                Você não é só meu amor — você é minha diversão, minha felicidade, meu refúgio.
+                Obrigado por cada momento ridículo, cada gargalhada, cada sorriso besta ao seu lado. 💕
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link" aria-label="Voltar para página principal">← Voltar</a>
+        </div>
+    </div>
+
+    <footer>
+        Rindo sempre ao seu lado ❤️
+    </footer>
+
+    <!-- Modal de Vídeo -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="close-modal" onclick="closeVideo()" aria-label="Fechar vídeo">&times;</span>
+            <video id="modalVideo" controls>
+                <source src="" type="video/mp4">
+                Seu navegador não suporta vídeo HTML5.
+            </video>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Array de vídeos
+        const videos = [
+            'videos/video1.mp4',
+            'videos/video2.mp4',
+            'videos/video3.mp4',
+            'videos/video4.mp4',
+            'videos/video5.mp4',
+            'videos/video6.mp4'
+        ];
+
+        // Abrir vídeo no modal
+        function openVideo(index) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            video.src = videos[index];
+            modal.classList.add('active');
+            video.play();
+        }
+
+        // Fechar vídeo
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            video.pause();
+            video.src = '';
+        }
+
+        // Fechar modal ao clicar fora do vídeo
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                closeVideo();
+            }
+        });
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeVideo();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.palhaçada-card');
+            
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+
+</html>

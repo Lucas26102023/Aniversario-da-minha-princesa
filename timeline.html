@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Jornada no Tempo 💫 - Feliz Aniversário</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Timeline Styles */
+        .timeline-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .timeline-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: #ff2e63;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
+        }
+
+        .timeline-header p {
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1em;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff2e63, #ff69b4, #ff105e);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: 52%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 52%;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 46, 99, 0.3);
+            cursor: pointer;
+            position: relative;
+            color: white;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 46, 99, 0.2);
+            box-shadow: 0 8px 32px rgba(255, 46, 99, 0.3);
+            border-color: rgba(255, 46, 99, 0.6);
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #ff69b4;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff2e63;
+            border: 4px solid rgba(59, 0, 20, 0.8);
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 30px;
+            z-index: 10;
+            box-shadow: 0 0 0 4px #ff69b4;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-marker {
+            width: 30px;
+            height: 30px;
+            top: 25px;
+            box-shadow: 0 0 0 6px #ff69b4, 0 0 20px rgba(255, 46, 99, 0.8);
+        }
+
+        .timeline-icon {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff2e63, #ff69b4);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 46, 99, 0.4);
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 46, 99, 0.6);
+        }
+
+        .back-link:focus {
+            outline: 3px solid #ff69b4;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 80px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                border-right: none;
+                border-left: 1px solid rgba(255, 46, 99, 0.3);
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+
+            .timeline-header h1 {
+                font-size: 2em;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #ff2e63;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Canvas para fundo animado -->
+    <canvas id="bg"></canvas>
+
+    <!-- Áudio de fundo -->
+    <audio id="bgMusic" loop>
+        <source src="musica/medo-bobo.mp3" type="audio/mpeg">
+    </audio>
+    <div class="timeline-container">
+        <div class="timeline-header">
+            <h1>Nossa Jornada no Tempo 💫</h1>
+            <p>Cada momento lado a lado</p>
+        </div>
+
+        <nav aria-label="navegação principal">
+            <a href="index.html" class="back-link" aria-label="Voltar para página principal">← Voltar</a>
+        </nav>
+
+        <div class="timeline" role="region" aria-label="linha do tempo do nosso relacionamento">
+            <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Dia 1</div>
+                    <div class="timeline-icon">😍</div>
+                    <div class="timeline-title">O Dia do gelo na barriga ao entregar a aliança </div>
+                    <div class="timeline-description">O dia em que tudo começou. Um momento que mudou nossas vidas para sempre. Aquele sorriso que não consigo esquecer e minha lerdeza ao errar a mão da aliança.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Semana 1</div>
+                    <div class="timeline-icon">💬</div>
+                    <div class="timeline-title">Conversas Infinitas</div>
+                    <div class="timeline-description">Horas conversando sobre tudo e nada. Descobrindo que somos completamente compatíveis. Risadas que não paravam.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Mês 1</div>
+                    <div class="timeline-icon">🎬</div>
+                    <div class="timeline-title">Nosso Primeiro Filme e primeira vez que saimos</div>
+                    <div class="timeline-description">A felicidade de assistir algo ao seu lado segurando a sua mão. Aquele momento que percebi que seria para sempre.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Mês 5</div>
+                    <div class="timeline-icon">🎉</div>
+                    <div class="timeline-title">Seu primeiro aniversário juntos</div>
+                    <div class="timeline-description">O medo de escolher o presente certo. Fazendo promessas de futuro. Sonhando nossos sonhos juntos.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Mês 12</div>
+                    <div class="timeline-icon">❤️</div>
+                    <div class="timeline-title">Nosso Primeiro ano juntos</div>
+                    <div class="timeline-description">1 ano de namoro — 365 dias construindo uma linda jornada de amor, companheirismo e momentos inesquecíveis.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Hoje</div>
+                    <div class="timeline-icon">💝</div>
+                    <div class="timeline-title">Celebrando Você</div>
+                    <div class="timeline-description">No seu aniversário especial, celebro cada dia ao teu lado. Você é o melhor presente da minha vida. Te amo!</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="index.html" class="back-link" aria-label="Voltar para página principal">← Voltar</a>
+        </div>
+    </div>
+
+    <footer>
+        Com amor, para você neste dia especial ❤️
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Adiciona interatividade aos itens da timeline
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+                
+                // Adiciona keyboard navigation
+                const content = item.querySelector('.timeline-content');
+                content.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        this.focus();
+                    }
+                });
+            });
+
+            // Smooth scroll ao clicar nos links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
